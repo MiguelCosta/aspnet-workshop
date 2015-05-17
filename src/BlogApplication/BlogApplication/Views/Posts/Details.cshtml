@@ -1,0 +1,82 @@
+﻿@model BlogApplication.Models.Post
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@Html.HiddenFor(model => model.Id)
+
+<h2>Details</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<h1>static</h1>
+<ul>
+    @foreach(var item in Model.Comment)
+    {
+        <li>
+            @item.Body
+        </li>
+    }
+</ul>
+
+<h1>js</h1>
+
+<div id="comments">
+
+</div>
+
+<script type="text/javascript">
+
+    getComments();
+
+    function getComments() {
+        var id = $('#Id').val();
+
+        $.ajax({
+            url: "/Posts/Comments",
+            type: "GET",
+            data: { postId: id },
+            datatype: "json",
+            success: getSucess,
+            error: getError
+        });
+
+    }
+
+    function getSucess(data) {
+        $.each(data, function (index, val) {
+            $('#comments').append("<p>" + val.Body + "</p>");
+        });
+    }
+
+    function getError() {
+        alert("fail");
+    }
+
+</script>

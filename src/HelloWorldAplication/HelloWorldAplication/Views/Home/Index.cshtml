@@ -1,0 +1,29 @@
+﻿@model HelloWorldAplication.Models.HelloWorldModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+Hello
+@Model.Message
+
+@if(true)
+{
+    <p>
+        kfkshgg kjdhgk jdfg 
+    </p>
+}
+
+
+<ul>
+    @for(int i = 0 ; i < 10 ; i++)
+    {
+        <li>@i</li>
+    }
+</ul>
+
+@Html.ActionLink("texto", "Hone", "Index")
+
+@Html.TextBox("dfkgjdkgj")
